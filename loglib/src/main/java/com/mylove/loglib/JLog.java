@@ -186,7 +186,7 @@ public final class JLog {
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
         for (String trace : traceString) {
-            if (trace.contains("at com.socks.library.KLog")) {
+            if (trace.contains("at com.mylove.loglib.KLog")) {
                 continue;
             }
             sb.append(trace).append("\n");
