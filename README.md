@@ -14,9 +14,9 @@ module 下添加
         }
     }
 
-     compile 'com.github.love-yanyi:Logger:1.0.1'
+     compile 'com.github.BenYanYi:Logger:1.0.1'
      或者
-     compile 'com.yanyi.benyanyi:loglib:0.0.1'
+     compile 'com.yanyi.benyanyi:loglib:1.0.0'
      建议使用后者，第一种方式已放弃更新
 
      可设置是否打印JLog.init(boolean),默认不打印
