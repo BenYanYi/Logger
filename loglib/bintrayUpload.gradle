@@ -7,7 +7,7 @@ def siteUrl = 'https://github.com/BenYanYi/Logger' // 项目主页。
 def gitUrl = 'https://github.com/BenYanYi/Logger.git' // Git仓库的url。
 
 group = "com.yanyi.benyanyi"// 唯一包名,比如compile 'com.ansen.http:okhttpencapsulation:1.0.1'中的com.ansen.http就是这里配置的。
-version = "0.0.1"//项目引用的版本号，比如compile 'com.ansen.http:okhttpencapsulation:1.0.1'中的1.0.1就是这里配置的。
+version = "1.0.0"//项目引用的版本号，比如compile 'com.ansen.http:okhttpencapsulation:1.0.1'中的1.0.1就是这里配置的。
 install {
     repositories.mavenInstaller {
         // This generates POM.xml with proper parameters
@@ -77,3 +77,4 @@ javadoc { //jav doc采用utf-8编码否则会报“GBK的不可映射字符”�
         charSet 'UTF-8'
     }
 }
+//gradlew bintrayUpload    terminal中输入
