@@ -17,6 +17,7 @@ module 下添加
      compile 'com.github.love-yanyi:Logger:1.0.1'
      或者
      compile 'com.yanyi.benyanyi:loglib:0.0.1'
+     建议使用后者
 
      可设置是否打印JLog.init(boolean),默认不打印
 
