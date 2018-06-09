@@ -15,11 +15,14 @@ module 下添加
     }
 
      compile 'com.github.love-yanyi:Logger:1.0.1'
+     或者
+     compile 'com.yanyi.benyanyi:loglib:0.0.1'
 
-     使用log前全局引用中需初始化JLog.init(BuildConfig.LOG_DEBUG);
+     可设置是否打印JLog.init(boolean),默认不打印
 
 <br/>
-project 下添加
+
+使用第一种引用则需project 下添加
 
     allprojects {
         repositories {
@@ -29,5 +32,4 @@ project 下添加
             }
         }
     }
-
-<br/>
+    
