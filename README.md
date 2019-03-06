@@ -12,6 +12,7 @@ module 下添加
     可设置是否打印JLog.init(boolean),默认debug版本apk打印，release版本apk不打印
     
 <br/>
+
 ## 更新
 
 * 2019/3/6 更新1.0.1，更改默认不打印为默认debug版本apk打印release版本apk不打印
