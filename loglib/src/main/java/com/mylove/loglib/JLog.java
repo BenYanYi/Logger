@@ -1,5 +1,8 @@
 package com.mylove.loglib;
 
+import android.annotation.SuppressLint;
+import android.app.Application;
+import android.content.pm.ApplicationInfo;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
@@ -41,16 +44,19 @@ public final class JLog {
 
     private static String mGlobalTag;
     private static boolean mIsGlobalTagEmpty = true;
-    private static boolean IS_SHOW_LOG = false;
+    private static boolean IS_SHOW_LOG = true;
+    private static boolean IS_INIT = false;
 
     public static void init(boolean isShowLog) {
         IS_SHOW_LOG = isShowLog;
+        IS_INIT = true;
     }
 
     public static void init(boolean isShowLog, @Nullable String tag) {
         IS_SHOW_LOG = isShowLog;
         mGlobalTag = tag;
         mIsGlobalTagEmpty = TextUtils.isEmpty(mGlobalTag);
+        IS_INIT = true;
     }
 
     public static void v() {
@@ -174,6 +180,9 @@ public final class JLog {
         if (!IS_SHOW_LOG) {
             return;
         }
+        if (!IS_INIT && isApkInDebug()) {
+            return;
+        }
 
         Throwable tr = new Throwable();
         StringWriter sw = new StringWriter();
@@ -186,7 +195,7 @@ public final class JLog {
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
         for (String trace : traceString) {
-            if (trace.contains("at com.mylove.loglib.KLog")) {
+            if (trace.contains("at com.mylove.loglib.JLog")) {
                 continue;
             }
             sb.append(trace).append("\n");
@@ -203,7 +212,9 @@ public final class JLog {
         if (!IS_SHOW_LOG) {
             return;
         }
-
+        if (!IS_INIT && isApkInDebug()) {
+            return;
+        }
         String[] contents = wrapperContent(STACK_TRACE_INDEX_5, tagStr, objects);
         String tag = contents[0];
         String msg = contents[1];
@@ -242,7 +253,9 @@ public final class JLog {
         if (!IS_SHOW_LOG) {
             return;
         }
-
+        if (!IS_INIT && isApkInDebug()) {
+            return;
+        }
         String[] contents = wrapperContent(STACK_TRACE_INDEX_5, tagStr, objectMsg);
         String tag = contents[0];
         String msg = contents[1];
@@ -304,6 +317,17 @@ public final class JLog {
         } else {
             Object object = objects[0];
             return object == null ? NULL : object.toString();
+        }
+    }
+
+    private static boolean isApkInDebug() {
+        try {
+            @SuppressLint("PrivateApi")
+            Application application = (Application) Class.forName("android.app.ActivityThread").getMethod("currentApplication").invoke(null, (Object[]) null);
+            ApplicationInfo info = application.getApplicationInfo();
+            return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) == 0;
+        } catch (Exception e) {
+            return false;
         }
     }
 }

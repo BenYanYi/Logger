@@ -1,10 +1,12 @@
 package com.mylove.logger;
 
+import android.annotation.SuppressLint;
+import android.app.Application;
+import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.widget.TextView;
 
 import com.mylove.loglib.JLog;
 
@@ -16,12 +18,26 @@ import com.mylove.loglib.JLog;
  */
 
 public class MainActivity extends AppCompatActivity {
+    private TextView tv;
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.v("********","*****************************");
-        JLog.d();
-        Log.v("************",BuildConfig.LOG_DEBUG+"");
+        tv = findViewById(R.id.text);
+        tv.setText(isApkInDebug() + "");
+        JLog.v("测试" + isApkInDebug());
+    }
+
+    private boolean isApkInDebug() {
+        try {
+            @SuppressLint("PrivateApi")
+            Application application = (Application) Class.forName("android.app.ActivityThread").getMethod("currentApplication").invoke(null, (Object[]) null);
+            ApplicationInfo info = application.getApplicationInfo();
+            return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) == 0;
+        } catch (Exception e) {
+            JLog.e(e.getMessage());
+            return true;
+        }
     }
 }

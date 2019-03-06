@@ -2,8 +2,6 @@ package com.mylove.logger;
 
 import android.app.Application;
 
-import com.mylove.loglib.JLog;
-
 /**
  * @author myLove
  * @time 2017/11/16 19:11
@@ -16,6 +14,6 @@ public class AppContext extends Application {
     public void onCreate() {
         super.onCreate();
 //        JLog.init(BuildConfig.LOG_DEBUG);
-        JLog.init(true);
+//        JLog.init(true);
     }
 }
