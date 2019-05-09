@@ -5,7 +5,7 @@
 
 module 下添加
 
-     compile 'com.yanyi.benyanyi:loglib:1.0.1'
+     implementation 'com.yanyi.benyanyi:loglib:1.0.1'
 
 <br/>
 
